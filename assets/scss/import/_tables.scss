@@ -4,6 +4,8 @@ table {
 
   table-layout: fixed;
   border-collapse: collapse;
+
+  border: 1px solid $gray-dark;
   thead {
     color: #fff;
     background: $black;
@@ -16,20 +18,23 @@ table {
     font-weight: 600;
     font-weight: bold;
 
-    padding: $small-spacing 0;
+    padding: $small-spacing 10px;
 
     text-align: center;
-
-    border-bottom: 1px solid darken($base-border-color, 15%);
   }
   td {
-    padding: $small-spacing 0;
+    padding: $small-spacing 10px;
 
-    border-bottom: $base-border;
+    color: $gray-medium;
   }
 }
 tr,
 td,
 th {
   vertical-align: middle;
+}
+tr {
+  &:nth-child(odd) {
+    background-color: $gray-dark;
+  }
 }

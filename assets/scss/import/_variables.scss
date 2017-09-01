@@ -24,7 +24,7 @@ $width: 1280px;
 $footer: 50px;
 $footer_margin: $footer - 2 * $footer;
 $base-border-radius: 3px;
-$base-spacing: $base-line-height * 1em;
+$base-spacing: $base-line-height * 1em * 1.2;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
@@ -40,7 +40,7 @@ $gray-border: #2e2e2e;
 
 $gray-hover: #202020;
 // Font Colors
-$base-font-color: $gray-dark;
+$base-font-color: $gray-light;
 $action-color: $blue;
 
 

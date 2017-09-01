@@ -233,9 +233,6 @@ header {
 }
 
 
-
-
-
 /* nav {
   ul {
     @extend .justify-child;
@@ -328,11 +325,129 @@ article {
 }
 
 
-footer {
-  height: $footer;
-  //margin: $footer_margin auto 0;
+.prod-character {
+  padding-top: 35px;
+  .char-ithem {
+    padding-top: 25px;
+    padding-bottom: 25px;
 
-  background-color: $gray-light;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #fff;
+    border: 1px solid $gray-dark;
+    .icon {
+      line-height: 70px;
+
+      display: inline-block;
+
+      margin-bottom: 15px;
+
+      transition: all .3s;
+      vertical-align: middle;
+
+      filter: invert(40%);
+      img {
+        display: inline-block;
+      }
+    }
+    .icon-label {
+      font-size: 13px;
+
+      transition: all .3s;
+
+      filter: invert(40%);
+    }
+    &:hover {
+      .icon,
+      .icon-label {
+        filter: none;
+      }
+    }
+  }
+}
+
+
+#portfolio {
+  .container-fluid {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  .container-portfolio {
+    .portfolio-ithem {
+      height: 22.3vw;
+      max-height: 285px;
+
+      transition: all .3s;
+
+      background-color: rgba(0, 0, 0, 0);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+
+      filter: grayscale(100%);
+      .portfolio-desc {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        display: inline-block;
+
+        transition: all .3s;
+        text-align: center;
+        vertical-align: middle;
+
+        opacity: 0;
+        background-color: rgba(0, 0, 0, .4);
+        p {
+          font-size: 1.2em;
+          line-height: 1.2;
+
+          position: relative;
+          top: 30%;
+
+          display: inline-block;
+
+          width: 70%;
+
+          color: #fff;
+        }
+      }
+      &:hover {
+        filter: none;
+        .portfolio-desc {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+footer {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  text-align: center;
+  //height: $footer;
+  //margin: $footer_margin auto 0;
+  //background-color: $gray-light;
+
+  color: #fff;
+  a {
+    transition: all .3s;
+
+    color: #fff;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 
@@ -350,7 +465,7 @@ footer {
     display:      -o-flex;
     display:         flex;
 
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     align-items: baseline;
   }
 }

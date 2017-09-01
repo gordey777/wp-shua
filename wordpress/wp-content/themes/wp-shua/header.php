@@ -22,26 +22,56 @@
 </head>
 <body <?php body_class(); ?>>
 <!-- wrapper -->
+
 <div class="wrapper">
   <header role="banner">
-    <div class="inner">
+    <div class="container-fluid black-bg">
+      <div class="row top-line flax-row">
 
-      <div class="logo">
-        <?php if ( !is_front_page() && !is_home() ){ ?>
-          <a href="<?php echo home_url(); ?>">
-        <?php } ?>
-            <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" alt="<?php wp_title( '' ); ?>" title="<?php wp_title( '' ); ?>" class="logo-img">
-        <?php if ( !is_front_page() && !is_home() ){ ?>
-          </a>
-        <?php } ?>
-      </div><!-- /logo -->
+        <div class="logo col-sm-3 col-xs-6">
+          <?php if ( !is_front_page() && !is_home() ){ ?>
+            <a href="<?php echo home_url(); ?>">
+          <?php } ?>
+              <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" alt="<?php wp_title( '' ); ?>" title="<?php wp_title( '' ); ?>" class="logo-img">
+          <?php if ( !is_front_page() && !is_home() ){ ?>
+            </a>
+          <?php } ?>
+        </div><!-- /.logo -->
+        <div class="olimpic col-sm-3 hidden-sm hidden-xs">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/head-olimpic.png">
+          <span class="desc">китайский олимпийский комитет официальный поставщик </span>
+        </div><!-- /.olimpic -->
+        <div class="head-tel col-md-3 col-xs-6">
+          <a href="tel:8-800-200-66-36">8-800-200-66-36</a>
+          <span class="desc">бесплатные звонки по РФ</span>
+        </div><!-- /.head-tel -->
 
-      <nav class="nav" role="navigation">
-        <?php wpeHeadNav(); ?>
-      </nav><!-- /nav -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
 
-    </div><!-- /.inner -->
+
+    <nav class="nav__header container-fluid" role="navigation">
+      <ul id="main-nav" class="headnav">
+        <li><a href="#about">о заводе</a></li>
+        <li><a href="#tracks">беговые дорожки</a></li>
+        <li><a href="#">преимущества</a></li>
+        <li><a href="#">примеры объектов</a></li>
+        <li><a href="#">представительство в рф</a></li>
+      </ul>
+
+        <ul class="langnav">
+          <li><a href="#" class="active">рус</a></li>
+          <li><a href="#">eng</a></li>
+          <li><a href="#">fr</a></li>
+          <li><a href="#">es</a></li>
+          <li><a href="#">ch</a></li>
+        </ul>
+<?php //wpeHeadNav(); ?>
+    </nav><!-- /nav -->
+
   </header><!-- /header -->
 
-  <section role="main">
-    <div class="inner">
+
+
+
+

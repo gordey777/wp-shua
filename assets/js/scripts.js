@@ -20,4 +20,44 @@ if (typeof jQuery === 'undefined') {
 } else {
   console.log('jQuery has loaded');
 }
-// Place any jQuery/helper plugins in here.
+
+
+var $headH = $('#header').height();
+//alert($headH );
+$("#section-1").css("margin-top", $headH + "px");
+
+
+
+
+(function($) {
+  $(window).load(function() {
+
+    $("#main-nav a,a[href='#top'],a[rel='m_PageScroll2id']").mPageScroll2id({
+      highlightSelector: "#nav-menu a"
+    });
+
+    $("a[rel='next']").click(function(e) {
+      e.preventDefault();
+      var to = $(this).parent().parent("section").next().attr("id");
+      $.mPageScroll2id("scrollTo", to);
+    });
+
+  });
+})(jQuery);
+
+(function($) {
+  $(window).load(function() {
+
+    $("#main-nav a,a[href='#top'],a[rel='m_PageScroll2id']").mPageScroll2id({
+
+      scrollSpeed: 1300,
+      autoScrollSpeed: true,
+      pageEndSmoothScroll: true,
+      offset: $headH,
+      forceSingleHighlight: false,
+      highlightByNextTarget: false,
+      /* disable plugin below [x,y] screen size: boolean, integer, array ([x,y]) */
+      disablePluginBelow: false,
+    });
+  });
+})(jQuery);
