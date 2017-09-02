@@ -148,6 +148,15 @@ header {
 }
 
 #about {
+  text-align: center;
+  h1,
+  h2 {
+    font-size: 2em;
+
+    text-transform: uppercase;
+
+    color: $blue;
+  }
   .about {
     .icons {
       .icon {
@@ -195,13 +204,6 @@ header {
   padding: 0 15px;
 
   text-align: center;
-  h2 {
-    font-size: 2em;
-
-    text-transform: uppercase;
-
-    color: $blue;
-  }
   h3 {
     font-size: 1.1em;
 
@@ -214,8 +216,8 @@ header {
     margin-left: -15px;
 
     text-align: center;
+    //background-image: url(../img/map-bg2.jpg);
 
-    background-image: url(../img/map-bg2.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -225,12 +227,34 @@ header {
     img {
       width: 100%;
       height: auto;
+      margin: 0 auto;
+
+      transition: all .3s;
+
+      filter: grayscale(100%);
+      &:hover {
+        filter: none;
+      }
     }
     p {
       text-align: left;
     }
   }
 }
+
+#tracks {
+  .video_wrapp {
+    iframe {
+      .ytp-title,
+      .ytp-chrome-top-buttons,
+      .ytp-share-button-visible {
+        display: none !important;
+      }
+    }
+  }
+}
+
+
 
 
 /* nav {

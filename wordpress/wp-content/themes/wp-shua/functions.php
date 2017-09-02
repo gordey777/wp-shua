@@ -680,4 +680,13 @@ function disable_emojicons_tinymce( $plugins ) {
   }
 }
 
+
+
+function filter_ptags_on_images($content){
+//функция preg replace, которая убивает тег p
+    return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+}
+add_filter('the_content', 'filter_ptags_on_images');
+add_filter('acf_the_content', 'filter_ptags_on_images');
+
 ?>

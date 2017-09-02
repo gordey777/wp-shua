@@ -8,64 +8,59 @@
       <div class="row">
 
         <div class="col-md-12 about">
-          <h1 class="page-title">shua — фундамент эффективного фитнес-центра</h1>
-          <div class="row icons">
-            <div class="icon col-md-3 col-xs-6">
-              <div class="img-wrapp">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/white-olimpic.png">
-              </div>
-              <span class="icon-title">надежно</span>
-              <p>Производитель с мировым именем в сфере производства спортивного оборудования</p>
-            </div>
-            <div class="icon col-md-3 col-xs-6">
-              <div class="img-wrapp">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/white-box.png">
-              </div>
-              <span class="icon-title">удобно</span>
-              <p>Большинство комплектующих находится на собственном складе в РФ. Минимальный срок доставки</p>
-            </div>
-            <div class="icon col-md-3 col-xs-6">
-              <div class="img-wrapp">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/white-econom.png">
-              </div>
-              <span class="icon-title">экономично</span>
-              <p>Эксклюзивный дилер на територии РФ, ГК «ЗСО», предлагает минимальные цены</p>
-            </div>
-            <div class="icon col-md-3 col-xs-6">
-              <div class="img-wrapp">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/white-hends.png">
-              </div>
-              <span class="icon-title">выгодно</span>
-              <p>Индивидуальная схема расчета: скидка от объема, отсрочка платежа</p>
-            </div>
-          </div>
+          <h1 class="page-title"><?php the_title();?></h1>
 
+          <?php if( have_rows('advantages') ): ?>
+            <div class="row icons">
+            <?php while ( have_rows('advantages') ) : the_row(); ?>
+              <?php $image = get_sub_field('img'); ?>
+              <div class="icon col-md-3 col-xs-6">
+                <div class="img-wrapp">
+                  <?php if ( !empty($image)) : ?>
+                    <img src="<?php echo $image['url']; ?>" title="<?php the_sub_field('title'); ?>">
+                  <?php endif; ?>
+
+                </div>
+                <span class="icon-title"><?php the_sub_field('icon_title'); ?></span>
+                <p><?php the_sub_field('desc'); ?></p>
+              </div>
+              <?php  endwhile; ?>
+            </div>
+          <?php endif; ?>
+
+        </div><!-- /.about-->
+        <div class="clearfix"></div>
+        <div class="col-md-6 col-md-offset-3">
+          <h2><?php the_field('title_about'); ?></h2>
+          <p><?php the_field('about_desc'); ?></p>
         </div>
-
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
     <div id="manufacture" class="container-fluid black-bg">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <h2>О заводе</h2>
-          <p>Продукция компании SHUA представлена по всему миру, молодой бренд активно завоевывает лидирующие позиции засчет своих главных конкурентных преимуществ: безупречное качество и разумная цена. </p>
+
+      <?php if( have_rows('geography') ): ?>
+        <?php while ( have_rows('geography') ) : the_row(); ?>
+          <?php $image = get_sub_field('img'); ?>
+          <div class="row">
+            <div class="col-md-12">
+              <h3><?php the_sub_field('title'); ?></h3>
+            </div>
+          </div><!-- /.row -->
+          <div class="manufacture-map" <?php if ( !empty($image)) : ?> style="background-image: url('<?php echo $image['url']; ?>');"<?php endif; ?>></div>
+        <?php  endwhile; ?>
+      <?php endif; ?>
+
+
+      <?php if( have_rows('about_content') ): ?>
+        <div class="row white-bg man-content hidden-xs">
+          <?php while ( have_rows('about_content') ) : the_row(); ?>
+            <div class="col-sm-6">
+              <?php the_sub_field('sub_content'); ?>
+            </div>
+          <?php endwhile; ?>
         </div>
-        <div class="clearfix"></div>
-        <div class="col-md-12">
-          <h3>География присутствия</h3>
-        </div>
-      </div><!-- /.row -->
-      <div class="manufacture-map"></div>
-      <div class="row white-bg man-content hidden-xs">
-        <div class="col-sm-6">
-          <img src="<?php echo get_template_directory_uri(); ?>/img/plant1.jpg" alt="">
-          <p>Компания SHUA является ведущим китайским брендом, производящим оборудование для занятий спортом. Уже 20 лет мы занимаемся созданием удобных и качественных фитнес-тренажеров. Наше оборудование разрабатывается большим коллективом инженеров и дизайнеров, соответствует требованиям безопасности, специализации и доступности. Каждому виду продукции присвоен сертификат качества, гарантирующий высокий уровень сочетания эргономики и биомеханики. Наши тренажеры подходят и для новичков, и для профессиональных спортсменов, для всех людей независимо от пола и возраста.</p>
-        </div>
-        <div class="col-sm-6">
-          <img src="<?php echo get_template_directory_uri(); ?>/img/plant2.jpg" alt="">
-          <p>Мы сотрудничаем с Пекинским университетом физической культуры, с Шанхайским институтом физической культуры, с известными специалистами, медиками и учеными, работаем рука об руку с такими высококачественными международными брендами, как американский «TRUE» и немецкий «GYM80». Компания SHUA является основным поставщиком олимпийского комитета и стратегическим партнером китайской ассоциации культуризма. <br>Оборудование для фитнеса, предлагаемое компанией SHUA, выделит Ваш фитнес-центр из массы других.</p>
-        </div>
-      </div>
+      <?php endif; ?>
+
     </div><!-- /#manufacture.container-fluid -->
   </section><!-- /#about -->
 
@@ -74,12 +69,16 @@
 
 
   <section id="tracks">
+
   <div class="container-fluid black-bg">
     <div class="row">
       <div class="col-md-12">
-        <h2>профессиональные беговые дорожки shua</h2>
+        <?php $video = get_field('video_file'); ?>
+
+        <h2><?php echo $video['title']; ?></h2>
           <div class="video_wrapp">
-            <iframe width="100%" height="500" src="https://www.youtube.com/embed/vwY5KN426dQ" frameborder="0" allowfullscreen></iframe>
+
+            <iframe width="100%" height="500" src="https://www.youtube.com/embed/<?php echo $video['vid']; ?>" frameborder="0" allowfullscreen></iframe>
           </div>
       </div>
       <div class="clearfix"></div>
@@ -87,174 +86,78 @@
         <h2>выберите серию</h2>
       </div>
     </div><!-- /.row -->
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-4">
-        <div class="row">
-          <div class="col-sm-7">
-            <div class="row tabs-nav">
-              <div class="tab-btn col-sm-4" data-tab="#tab-1">серия X5</div>
-              <div class="tab-btn col-sm-4" data-tab="#tab-2">серия X9</div>
-              <div class="tab-btn col-sm-4" data-tab="#tab-3">серия X9+</div>
-              <div class="col-md-12">
-                <a href="#"></a>
+    <?php if( have_rows('product_tabs') ): ?>
+
+      <div id="product_tabs" class="row">
+        <div class="col-sm-8 col-sm-offset-4">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="row tabs-nav">
+                <?php $i = 1; ?>
+                <?php while ( have_rows('product_tabs') ) : the_row(); ?>
+
+                  <a class="tab-btn col-sm-4" data-tab="#tab-<?php echo $i; ?>"><?php the_sub_field('model'); ?></a>
+
+                <?php  $i++; ?>
+                <?php  endwhile; ?>
+                <div class="col-md-12">
+                  <a href="#">сравнить</a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-md-4 col-sm-5 col-md-offset-1 present__doc">PDF-презентация, 28 мб</div>
+            <div class="col-md-4 col-sm-5 col-md-offset-1 "><a href="#" class="present__doc">PDF-презентация, 28 мб</a></div>
+          </div>
         </div>
-      </div>
-      <div id="tab-1" class="col-md-12 tab-content">
-        <div class="row">
-          <div class="col-sm-4 prod-img">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/prod-x9plus.png" alt="">
-          </div>
-          <div class="col-sm-8 prod-table">
-            <div class="table_title"></div>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Название</td>
-                  <td>SH-5518</td>
-                  <td>Беговое полотно</td>
-                  <td>580×1570 мм</td>
-                </tr>
-                <tr>
-                  <td>Мотор АС</td>
-                  <td>4 л.с.</td>
-                  <td>Дисплей</td>
-                  <td>LED дисплей</td>
-                </tr>
-                <tr>
-                  <td>Скорость</td>
-                  <td>0,8-20 км/час</td>
-                  <td>Мах нагрузка</td>
-                  <td>180 кг</td>
-                </tr>
-                <tr>
-                  <td>Угол наклона</td>
-                  <td>от -3% до 15%</td>
-                  <td>Габариты</td>
-                  <td>2190×960×1580 мм</td>
-                </tr>
-                <tr>
-                  <td>Беговое полотно</td>
-                  <td>3,1 мм</td>
-                  <td>Складывается</td>
-                  <td>не складывается</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>Амортизирующая система</td>
-                  <td>SUT</td>
-                </tr>
-              </tbody>
-            </table>
+        <?php $j = 1; ?>
+        <?php while ( have_rows('product_tabs') ) : the_row(); ?>
+          <?php $image = get_sub_field('img'); ?>
 
-
-          </div>
-          <div class="col-md-12 prod-character">
-            <div class="row flax-row">
-              <div class="col-sm-3 char-ithem">
-                <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-ipad.png" alt=""></div>
-                <div class="icon-label">установка ipad</div>
+          <div id="tab-<?php echo $j; ?>" class="col-md-12 tab-content">
+            <div class="row">
+              <div class="col-sm-4 prod-img">
+                <?php if ( !empty($image)) : ?>
+                  <img src="<?php echo $image['url']; ?>" title="<?php the_sub_field('title'); ?>">
+                <?php endif; ?>
+              </div>
+              <div class="col-sm-8 prod-table">
+                <div class="table_title"><?php the_sub_field('title'); ?></div>
+                <?php the_sub_field('cont'); ?>
               </div>
 
-              <div class="col-sm-3 char-ithem">
-                <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-load.png" alt=""></div>
-                <div class="icon-label">макс. нагрузка 180 кг</div>
-              </div>
+              <?php if( get_sub_field('icons' ) ): ?>
+                <div class="col-md-12 prod-character">
+                  <div class="row flax-row">
 
-              <div class="col-sm-3 char-ithem">
-                <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-whide.png" alt=""></div>
-                <div class="icon-label">580 мм ширина полотна</div>
-              </div>
+                    <?php while ( has_sub_field('icons' ) ) : ?>
+                      <?php $image = get_sub_field('sub_img'); ?>
 
-              <div class="col-sm-3 char-ithem">
-                <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-noise.png" alt=""></div>
-                <div class="icon-label">сверхтихий двигатель</div>
-              </div>
+                      <div class="col-sm-3 char-ithem">
+                        <div class="icon">
+                          <?php if ( !empty($image)) : ?>
+                            <img src="<?php echo $image['url']; ?>">
+                          <?php endif; ?>
+                        </div>
+                        <div class="icon-label"><?php the_sub_field('sub_title'); ?></div>
+                      </div>
+                    <?php endwhile; ?>
 
-              <div class="col-sm-3 char-ithem">
-                <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-led.png" alt=""></div>
-                <div class="icon-label">LED-дисплей</div>
+                  </div>
+                <?php endif; ?>
               </div>
-
-              <div class="col-sm-3 char-ithem">
-                <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-heart.png" alt=""></div>
-                <div class="icon-label">контроль сердцебиения</div>
-              </div>
-
-              <div class="col-sm-3 char-ithem">
-                <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-angale.png" alt=""></div>
-                <div class="icon-label">угол наклона 15&#176;</div>
-              </div>
-
-              <div class="col-sm-3 char-ithem">
-                <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-dumper.png" alt=""></div>
-                <div class="icon-label">амортизирующая система</div>
-              </div>
-
             </div>
-
-          </div>
-        </div>
-      </div><!-- /#tab-1 -->
-
+          </div><!-- /#tab-<?php echo $j; ?> -->
+          <?php  $j++; ?>
+        <?php  endwhile; ?>
 
 
-    </div><!-- /.row -->
+      </div><!-- /.row -->
+    <?php endif; ?>
     <div class="row">
       <div id="comparison" class="col-md-12">
         <h2>наглядно: <br>сравнительные характеристики серий</h2>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                </tr>
-                <tr>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                </tr>
-                <tr>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                </tr>
-                <tr>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                </tr>
-                <tr>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                </tr>
-                <tr>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                </tr>
-                <tr>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                  <td>Division 1</td>
-                  <td>Division 2</td>
-                </tr>
+        <?php the_field('сomparison'); ?>
 
-              </tbody>
-            </table>
       </div>
 
     </div><!-- /.row -->
@@ -262,39 +165,32 @@
 
   </section><!-- /#tracks -->
 
+  <?php if( have_rows('portfolio') ): ?>
 
-  <section id="portfolio">
-    <div class="container-fluid container-portfolio black-bg">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>примеры объектов в РФ и СНГ</h2>
-          <span class="subtitle">укомплектованных оборудованием shua</span>
-        </div>
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-sm-4 portfolio-ithem" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/hull1.jpg);">
-              <div class="portfolio-desc"><p>ФИТНЕС-ЦЕНТР "БАТЫРFITNES", Г. ЕЛАБУГА, РЕСПУБЛИКА ТАТАРСТАН</p></div>
-            </div>
-            <div class="col-sm-4 portfolio-ithem" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/hull2.jpg);">
-              <div class="portfolio-desc"><p></p></div>
-            </div>
-            <div class="col-sm-4 portfolio-ithem" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/hull3.jpg);">
-              <div class="portfolio-desc"><p></p></div>
-            </div>
-            <div class="col-sm-4 portfolio-ithem" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/hull4.jpg);">
-              <div class="portfolio-desc"><p></p></div>
-            </div>
-            <div class="col-sm-4 portfolio-ithem" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/hull5.jpg);">
-              <div class="portfolio-desc"><p></p></div>
-            </div>
-            <div class="col-sm-4 portfolio-ithem" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/hull6.jpg);">
-              <div class="portfolio-desc"><p></p></div>
-            </div>
+
+    <section id="portfolio">
+      <div class="container-fluid container-portfolio black-bg">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>примеры объектов в РФ и СНГ</h2>
+            <span class="subtitle">укомплектованных оборудованием shua</span>
           </div>
+          <div class="col-md-12">
+            <div class="row">
+              <?php while ( have_rows('portfolio') ) : the_row(); ?>
+                <?php $image = get_sub_field('img'); ?>
+
+                <div class="col-sm-4 portfolio-ithem" <?php if ( !empty($image)) : ?> style="background-image: url('<?php echo $image['url']; ?>');"<?php endif; ?>>
+                  <div class="portfolio-desc"><p><?php the_sub_field('desc'); ?></p></div>
+                </div>
+              <?php  endwhile; ?>
+
+            </div>
+          </div><!-- /.row -->
         </div><!-- /.row -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </section><!-- /#portfolio -->
+      </div><!-- /.container-fluid -->
+    </section><!-- /#portfolio -->
+  <?php endif; ?>
 
   <section id="contacts">
   <div class="container-fluid black-bg">
@@ -302,7 +198,9 @@
     <div class="col-md-12 map-wrapp">
       <div id="yamap" style="width: 100%; height: 420px">
 
+
       </div>
+
     </div>
 
     </div><!-- /.row -->

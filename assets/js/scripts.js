@@ -27,6 +27,7 @@ var $headH = $('#header').height();
 $("#section-1").css("margin-top", $headH + "px");
 
 
+$(document).ready(function() {
 
 
 (function($) {
@@ -61,3 +62,20 @@ $("#section-1").css("margin-top", $headH + "px");
     });
   });
 })(jQuery);
+
+(function($) {
+
+  var tabs = $("#product_tabs .tabs-nav .tab-btn");
+
+  tabs.click(function() {
+    var content = $(this).data('tab');
+
+    tabs.removeClass("activ");
+    $(this).addClass("activ");
+    $("#product_tabs").find('.tab-content').hide();
+    $("#product_tabs").find('.tab-content.active').removeClass("activ");
+    $(content).addClass("active").fadeIn(300);
+  });
+
+})(jQuery);
+});
