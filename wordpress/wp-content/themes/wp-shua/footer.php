@@ -1,12 +1,12 @@
 </div><!-- /wrapper -->
 
   <footer role="contentinfo">
-    <div class="container-fluid black-bg">
+    <div class="footer-cont container-fluid black-bg">
       <div class="row">
         <div class="footer-center col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
         <div class="footer-logos">
           <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/foter-logo.png" alt=""></a>
-          <a href="#top"><img src="<?php echo get_template_directory_uri(); ?>/img/footer-szo.png" alt=""></a>
+          <a href="#header" class="scroll__to"><img src="<?php echo get_template_directory_uri(); ?>/img/footer-szo.png" alt=""></a>
         </div>
           <p class="copyright">
             © 2008 - <?php echo date("Y"); ?> ГК «ЗСО»

@@ -52,7 +52,7 @@
 
     <nav class="nav__header container-fluid" role="navigation">
       <ul id="main-nav" class="headnav">
-        <li><a href="#about" class="active">о заводе</a></li>
+        <li><a href="#about">о заводе</a></li>
         <li><a href="#tracks">беговые дорожки</a></li>
         <li><a href="#">преимущества</a></li>
         <li><a href="#portfolio">примеры объектов</a></li>

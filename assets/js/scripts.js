@@ -75,26 +75,27 @@ jQuery(document).ready(function() {
 
 
   /*ACTIVE MENU*/
-  // jQuery("#main-nav a").click(function() {
+  jQuery("#main-nav a").hover(function() {
 
-  //   var linePosition = jQuery(this).offset(),
-  //     wrappPosition = jQuery('.wrapper').offset(),
+    var linePosition = jQuery(this).offset(),
+      wrappPosition = jQuery('.wrapper').offset(),
 
-  //     mnuW = jQuery(this).parent('li').width();
+      mnuW = jQuery(this).parent('li').width();
 
-  //   jQuery("#bottom_line").css({
-  //     left: linePosition.left - wrappPosition.left,
-  //     //left : 'auto',
-  //     //right: linePosition.leftright,
-  //     width: mnuW,
-  //   });
-  // });
+    jQuery("#bottom_line").css({
+      left: linePosition.left - wrappPosition.left,
+      //left : 'auto',
+      //right: linePosition.leftright,
+      width: mnuW,
+    });
+  });
 
   var mnuH = jQuery("#main-nav").height();
   jQuery(window).scroll(function() {
     mnuH = jQuery("#main-nav").height();
   }).scroll();
 
+  jQuery('#main-nav a:first').addClass('active');
 
   $('header').css('padding-bottom', mnuH);
 
@@ -109,7 +110,7 @@ jQuery(document).ready(function() {
         left: linePos.left - wrappPos.left,
         width: mnuW,
       });
-    }, 100);
+    }, 5);
     return;
   }
 
@@ -122,6 +123,18 @@ jQuery(document).ready(function() {
 
     jQuery('body,html').animate({
       scrollTop: scrollPoint
+    }, 500);
+
+    return false;
+
+  })
+  jQuery('.scroll__to').on('click', function() {
+
+    var scrollAnc = jQuery(this).attr('href'),
+      scrollPos = jQuery(scrollAnc).offset().top - 37;
+
+    jQuery('body,html').animate({
+      scrollTop: scrollPos
     }, 500);
 
     return false;
@@ -231,4 +244,21 @@ jQuery(window).scroll(function() {
 
     activeMenu();
   }
+
+  jQuery("#main-nav a").hover(function() {
+
+    var linePosition = jQuery(this).offset(),
+      wrappPosition = jQuery('.wrapper').offset(),
+
+      mnuW = jQuery(this).parent('li').width();
+
+    jQuery("#bottom_line").css({
+      left: linePosition.left - wrappPosition.left,
+      //left : 'auto',
+      //right: linePosition.leftright,
+      width: mnuW,
+    });
+  });
+
+
 }).scroll();

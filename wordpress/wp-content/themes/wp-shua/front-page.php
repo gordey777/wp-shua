@@ -4,7 +4,7 @@
 
   <section id="about" <?php post_class(); ?>>
     <?php edit_post_link(); ?>
-    <div class="container-fluid black-bg siluet">
+    <div class="container-fluid siluet">
       <div class="row">
 
         <div class="col-md-12 about">
@@ -36,7 +36,7 @@
         </div>
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
-    <div id="manufacture" class="container-fluid black-bg geography">
+    <div id="manufacture" class="container-fluid geography">
 
       <?php if( have_rows('geography') ): ?>
         <?php while ( have_rows('geography') ) : the_row(); ?>
@@ -66,7 +66,7 @@
   </section><!-- /#about -->
 
   <section id="video">
-    <div class="container-fluid black-bg">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <?php $video = get_field('video_file'); ?>
@@ -74,7 +74,7 @@
           <h2><?php echo $video['title']; ?></h2>
             <div class="video_wrapp">
 
-              <iframe width="100%" height="500" src="https://www.youtube.com/embed/<?php echo $video['vid']; ?>" frameborder="0" allowfullscreen></iframe>
+              <iframe id="tracks_video" width="100%" src="https://www.youtube.com/embed/<?php echo $video['vid']; ?>" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
       </div><!-- /.row -->
@@ -82,7 +82,7 @@
   </section><!-- /#video -->
 
   <section id="tracks">
-    <div class="container-fluid black-bg">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <h2>выберите серию</h2>
@@ -92,30 +92,48 @@
       <?php if( have_rows('product_tabs') ): ?>
 
         <div id="product_tabs" class="row">
-          <div class="col-sm-8 col-sm-offset-4">
-            <div class="row">
-              <div class="col-sm-7">
-                <div class="tabs-nav">
-                  <?php $i = 1; ?>
+          <div class="col-md-8 col-xs-12 col-md-offset-4">
 
-                  <?php while ( have_rows('product_tabs') ) : the_row(); ?>
-                    <?php if ( $i == 1 ) {
+            <div class="tabs-nav">
+              <div class="tabs">
+                <?php $i = 1; ?>
 
-                      $act_class = 'active';
-                      } else {
-                        $act_class = '';
-                      } ?>
-                    <a class="tab-btn <?php echo $act_class; ?>" data-tab="#tab-<?php echo $i; ?>"><?php the_sub_field('model'); ?></a>
+                <?php while ( have_rows('product_tabs') ) : the_row(); ?>
+                  <?php if ( $i == 1 ) {
 
-                    <?php  $i++; ?>
-                  <?php  endwhile; ?>
-                </div>
-                <a href="#comparison" class="hidden-xs .comparison_link">сравнить</a>
+                    $act_class = 'active';
+                    } else {
+                      $act_class = '';
+                    } ?>
+                  <a class="tab-btn <?php echo $act_class; ?>" data-tab="#tab-<?php echo $i; ?>"><?php the_sub_field('model'); ?></a>
+
+                  <?php  $i++; ?>
+                <?php  endwhile; ?>
               </div>
-
-              <div class="col-md-4 col-sm-5 col-md-offset-1 "><a href="#" class="present__doc">PDF-презентация, 28 мб</a></div>
+              <a href="#comparison" class="hidden-xs comparison_link scroll__to">сравнить</a>
             </div>
+
+
+
+            <?php $file = get_field('pdf_present'); ?>
+            <?php if ( !empty($file)) : ?>
+
+              <?php $attachment_id = $file['ID'];
+              $url = wp_get_attachment_url( $attachment_id );
+              $title = get_the_title( $attachment_id );
+
+              $filesize = filesize( get_attached_file( $attachment_id ) );
+              $filesize = size_format($filesize, 0); ?>
+
+              <a rel="nofollow" href="<?php echo $file['url']; ?>" download="<?php echo $file['url']; ?>" class="present__doc hidden-xs">
+                PDF-презентация,
+                <span class="size"> <?php echo $filesize; ?></span>
+              </a>
+            <?php endif; ?>
+
+
           </div>
+          <div class="clearfix"></div>
           <?php $j = 1; ?>
           <?php while ( have_rows('product_tabs') ) : the_row(); ?>
             <?php $image = get_sub_field('img'); ?>
@@ -133,7 +151,7 @@
                   <?php endif; ?>
                 </div>
                 <div class="col-sm-8 prod-table">
-                  <div class="table_title"><?php the_sub_field('title'); ?></div>
+                  <div class="table_title">Характеристики<span class="right"><?php the_sub_field('title'); ?></span></div>
                   <?php the_sub_field('cont'); ?>
                 </div>
 
@@ -142,7 +160,7 @@
                     <?php while ( has_sub_field('icons' ) ) : ?>
                       <?php $image = get_sub_field('sub_img'); ?>
 
-                      <div class="col-sm-3 char-ithem">
+                      <div class="col-sm-3 col-xs-6 char-ithem">
                         <div class="icon">
                           <?php if ( !empty($image)) : ?>
                             <img src="<?php echo $image['url']; ?>">
@@ -161,12 +179,27 @@
 
         </div><!-- /.row -->
       <?php endif; ?>
+                  <?php $file = get_field('pdf_present'); ?>
+            <?php if ( !empty($file)) : ?>
+
+              <?php $attachment_id = $file['ID'];
+              $url = wp_get_attachment_url( $attachment_id );
+              $title = get_the_title( $attachment_id );
+
+              $filesize = filesize( get_attached_file( $attachment_id ) );
+              $filesize = size_format($filesize, 0); ?>
+
+              <a rel="nofollow" href="<?php echo $file['url']; ?>" download="<?php echo $file['url']; ?>" class="present__doc visible-xs-inline-block">
+                PDF-презентация,
+                <span class="size"> <?php echo $filesize; ?></span>
+              </a>
+            <?php endif; ?>
     </div><!-- /.container-fluid -->
 
   </section><!-- /#tracks -->
 
-  <section id="comparison">
-    <div class="container-fluid black-bg">
+  <section id="comparison"  class="hidden-xs">
+    <div class="container-fluid">
       <div class="row">
         <div id="comparison-cont" class="col-md-12">
           <h2>наглядно: <br>сравнительные характеристики серий</h2>
@@ -179,7 +212,7 @@
 
   <?php if( have_rows('portfolio') ): ?>
     <section id="portfolio">
-      <div class="container-fluid container-portfolio black-bg">
+      <div class="container-fluid container-portfolio">
         <div class="row">
           <div class="col-md-12">
             <h2>примеры объектов в РФ и СНГ</h2>
@@ -190,7 +223,7 @@
               <?php while ( have_rows('portfolio') ) : the_row(); ?>
                 <?php $image = get_sub_field('img'); ?>
 
-                <div class="col-sm-4 portfolio-ithem" <?php if ( !empty($image)) : ?> style="background-image: url('<?php echo $image['url']; ?>');"<?php endif; ?>>
+                <div class="col-sm-4 col-xs-6 portfolio-ithem" <?php if ( !empty($image)) : ?> style="background-image: url('<?php echo $image['url']; ?>');"<?php endif; ?>>
                   <div class="portfolio-desc"><p><?php the_sub_field('desc'); ?></p></div>
                 </div>
               <?php  endwhile; ?>
@@ -203,10 +236,12 @@
   <?php endif; ?>
 
   <section id="contacts">
-  <div class="container-fluid black-bg">
+  <div class="container-fluid">
     <div class="row">
-    <h2>представительство в рф</h2>
-    <div class="col-md-12 map-wrapp">
+      <h2>представительство в рф</h2>
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+    <div class="col-md-12 map-wrapp hidden-xs">
       <div id="yamap" style="width: 100%; height: 420px">
 
 
@@ -214,8 +249,6 @@
 
     </div>
 
-    </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
   </section><!-- /#contacts -->
 
 
