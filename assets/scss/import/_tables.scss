@@ -13,19 +13,17 @@ table {
   th,
   td {
     position: relative;
+
+    color: $gray-medium;
   }
   th {
     font-weight: 600;
     font-weight: bold;
 
     padding: $small-spacing 10px;
-
-    text-align: center;
   }
   td {
     padding: $small-spacing 10px;
-
-    color: $gray-medium;
   }
 }
 tr,

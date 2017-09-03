@@ -34,8 +34,8 @@
 
     <?php wp_footer(); ?>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.malihu.PageScroll2id.min.js"></script>
-  <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/<?php echo get_template_directory_uri(); ?>/js/?um=constructor%3A0504abbe495faaf89b225ae12b7cc64c61fe11b786da9bfdfe6c16f070ad8216&amp;width=100%25&amp;height=420&amp;lang=uk_RU&amp;scroll=false;id=yamap"></script>
-
+<!--   <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/<?php echo get_template_directory_uri(); ?>/js/?um=constructor%3A0504abbe495faaf89b225ae12b7cc64c61fe11b786da9bfdfe6c16f070ad8216&amp;width=100%25&amp;height=420&amp;lang=uk_RU&amp;scroll=false;id=yamap"></script>
+ -->
     <style>
     #tracks .video_wrapp iframe .ytp-title,
     #tracks .video_wrapp iframe .ytp-chrome-top-buttons,

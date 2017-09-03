@@ -2,9 +2,9 @@
 
   <?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
-  <section role="main" id="about" <?php post_class(); ?>>
+  <section id="about" <?php post_class(); ?>>
     <?php edit_post_link(); ?>
-    <div class="container-fluid black-bg">
+    <div class="container-fluid black-bg siluet">
       <div class="row">
 
         <div class="col-md-12 about">
@@ -30,13 +30,13 @@
 
         </div><!-- /.about-->
         <div class="clearfix"></div>
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3 about-manufacture">
           <h2><?php the_field('title_about'); ?></h2>
           <p><?php the_field('about_desc'); ?></p>
         </div>
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
-    <div id="manufacture" class="container-fluid black-bg">
+    <div id="manufacture" class="container-fluid black-bg geography">
 
       <?php if( have_rows('geography') ): ?>
         <?php while ( have_rows('geography') ) : the_row(); ?>
@@ -50,85 +50,95 @@
         <?php  endwhile; ?>
       <?php endif; ?>
 
+    </div><!-- /#manufacture.container-fluid -->
 
-      <?php if( have_rows('about_content') ): ?>
-        <div class="row white-bg man-content hidden-xs">
+    <?php if( have_rows('about_content') ): ?>
+      <div class="container-fluid white-bg man-content hidden-xs">
+        <div class="row">
           <?php while ( have_rows('about_content') ) : the_row(); ?>
             <div class="col-sm-6">
               <?php the_sub_field('sub_content'); ?>
             </div>
           <?php endwhile; ?>
         </div>
-      <?php endif; ?>
-
-    </div><!-- /#manufacture.container-fluid -->
+      </div><!-- .container-fluid -->
+    <?php endif; ?>
   </section><!-- /#about -->
 
+  <section id="video">
+    <div class="container-fluid black-bg">
+      <div class="row">
+        <div class="col-md-12">
+          <?php $video = get_field('video_file'); ?>
 
+          <h2><?php echo $video['title']; ?></h2>
+            <div class="video_wrapp">
 
-
+              <iframe width="100%" height="500" src="https://www.youtube.com/embed/<?php echo $video['vid']; ?>" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section><!-- /#video -->
 
   <section id="tracks">
-
-  <div class="container-fluid black-bg">
-    <div class="row">
-      <div class="col-md-12">
-        <?php $video = get_field('video_file'); ?>
-
-        <h2><?php echo $video['title']; ?></h2>
-          <div class="video_wrapp">
-
-            <iframe width="100%" height="500" src="https://www.youtube.com/embed/<?php echo $video['vid']; ?>" frameborder="0" allowfullscreen></iframe>
-          </div>
-      </div>
-      <div class="clearfix"></div>
-      <div class="col-md-12">
-        <h2>выберите серию</h2>
-      </div>
-    </div><!-- /.row -->
-    <?php if( have_rows('product_tabs') ): ?>
-
-      <div id="product_tabs" class="row">
-        <div class="col-sm-8 col-sm-offset-4">
-          <div class="row">
-            <div class="col-sm-7">
-              <div class="row tabs-nav">
-                <?php $i = 1; ?>
-                <?php while ( have_rows('product_tabs') ) : the_row(); ?>
-
-                  <a class="tab-btn col-sm-4" data-tab="#tab-<?php echo $i; ?>"><?php the_sub_field('model'); ?></a>
-
-                <?php  $i++; ?>
-                <?php  endwhile; ?>
-                <div class="col-md-12">
-                  <a href="#">сравнить</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 col-sm-5 col-md-offset-1 "><a href="#" class="present__doc">PDF-презентация, 28 мб</a></div>
-          </div>
+    <div class="container-fluid black-bg">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>выберите серию</h2>
         </div>
-        <?php $j = 1; ?>
-        <?php while ( have_rows('product_tabs') ) : the_row(); ?>
-          <?php $image = get_sub_field('img'); ?>
+      </div><!-- /.row -->
 
-          <div id="tab-<?php echo $j; ?>" class="col-md-12 tab-content">
+      <?php if( have_rows('product_tabs') ): ?>
+
+        <div id="product_tabs" class="row">
+          <div class="col-sm-8 col-sm-offset-4">
             <div class="row">
-              <div class="col-sm-4 prod-img">
-                <?php if ( !empty($image)) : ?>
-                  <img src="<?php echo $image['url']; ?>" title="<?php the_sub_field('title'); ?>">
-                <?php endif; ?>
-              </div>
-              <div class="col-sm-8 prod-table">
-                <div class="table_title"><?php the_sub_field('title'); ?></div>
-                <?php the_sub_field('cont'); ?>
+              <div class="col-sm-7">
+                <div class="tabs-nav">
+                  <?php $i = 1; ?>
+
+                  <?php while ( have_rows('product_tabs') ) : the_row(); ?>
+                    <?php if ( $i == 1 ) {
+
+                      $act_class = 'active';
+                      } else {
+                        $act_class = '';
+                      } ?>
+                    <a class="tab-btn <?php echo $act_class; ?>" data-tab="#tab-<?php echo $i; ?>"><?php the_sub_field('model'); ?></a>
+
+                    <?php  $i++; ?>
+                  <?php  endwhile; ?>
+                </div>
+                <a href="#comparison" class="hidden-xs .comparison_link">сравнить</a>
               </div>
 
-              <?php if( get_sub_field('icons' ) ): ?>
-                <div class="col-md-12 prod-character">
-                  <div class="row flax-row">
+              <div class="col-md-4 col-sm-5 col-md-offset-1 "><a href="#" class="present__doc">PDF-презентация, 28 мб</a></div>
+            </div>
+          </div>
+          <?php $j = 1; ?>
+          <?php while ( have_rows('product_tabs') ) : the_row(); ?>
+            <?php $image = get_sub_field('img'); ?>
+            <?php if ( $j == 1 ) {
+              $activ_class = 'active';
+              } else{
+              $activ_class = 'hidden_tab';
+              } ?>
 
+            <div id="tab-<?php echo $j; ?>" class="col-md-12 tab-content <?php echo $activ_class; ?>">
+              <div class="row">
+                <div class="col-sm-4 prod-img">
+                  <?php if ( !empty($image)) : ?>
+                    <img src="<?php echo $image['url']; ?>" title="<?php the_sub_field('title'); ?>">
+                  <?php endif; ?>
+                </div>
+                <div class="col-sm-8 prod-table">
+                  <div class="table_title"><?php the_sub_field('title'); ?></div>
+                  <?php the_sub_field('cont'); ?>
+                </div>
+
+                <?php if( get_sub_field('icons' ) ): ?>
+                  <div class="col-md-12 prod-character">
                     <?php while ( has_sub_field('icons' ) ) : ?>
                       <?php $image = get_sub_field('sub_img'); ?>
 
@@ -141,33 +151,33 @@
                         <div class="icon-label"><?php the_sub_field('sub_title'); ?></div>
                       </div>
                     <?php endwhile; ?>
-
                   </div>
                 <?php endif; ?>
-              </div>
-            </div>
-          </div><!-- /#tab-<?php echo $j; ?> -->
-          <?php  $j++; ?>
-        <?php  endwhile; ?>
 
+              </div><!-- /.row -->
+            </div><!-- /#tab-<?php echo $j; ?> -->
+            <?php  $j++; ?>
+          <?php  endwhile; ?>
 
-      </div><!-- /.row -->
-    <?php endif; ?>
-    <div class="row">
-      <div id="comparison" class="col-md-12">
-        <h2>наглядно: <br>сравнительные характеристики серий</h2>
-        <?php the_field('сomparison'); ?>
-
-      </div>
-
-    </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
+        </div><!-- /.row -->
+      <?php endif; ?>
+    </div><!-- /.container-fluid -->
 
   </section><!-- /#tracks -->
 
+  <section id="comparison">
+    <div class="container-fluid black-bg">
+      <div class="row">
+        <div id="comparison-cont" class="col-md-12">
+          <h2>наглядно: <br>сравнительные характеристики серий</h2>
+          <?php the_field('сomparison'); ?>
+        </div>
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section><!-- /#tracks -->
+
+
   <?php if( have_rows('portfolio') ): ?>
-
-
     <section id="portfolio">
       <div class="container-fluid container-portfolio black-bg">
         <div class="row">
@@ -195,6 +205,7 @@
   <section id="contacts">
   <div class="container-fluid black-bg">
     <div class="row">
+    <h2>представительство в рф</h2>
     <div class="col-md-12 map-wrapp">
       <div id="yamap" style="width: 100%; height: 420px">
 

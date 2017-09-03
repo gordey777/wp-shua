@@ -24,7 +24,7 @@
 <!-- wrapper -->
 
 <div class="wrapper">
-  <header role="banner">
+  <header id="header" role="banner">
     <div class="container-fluid black-bg">
       <div class="row top-line flax-row">
 
@@ -52,11 +52,12 @@
 
     <nav class="nav__header container-fluid" role="navigation">
       <ul id="main-nav" class="headnav">
-        <li><a href="#about">о заводе</a></li>
+        <li><a href="#about" class="active">о заводе</a></li>
         <li><a href="#tracks">беговые дорожки</a></li>
         <li><a href="#">преимущества</a></li>
-        <li><a href="#">примеры объектов</a></li>
-        <li><a href="#">представительство в рф</a></li>
+        <li><a href="#portfolio">примеры объектов</a></li>
+        <li><a href="#contacts">представительство в рф</a></li>
+
       </ul>
 
         <ul class="langnav">
@@ -65,8 +66,10 @@
           <li><a href="#">fr</a></li>
           <li><a href="#">es</a></li>
           <li><a href="#">ch</a></li>
+
         </ul>
 <?php //wpeHeadNav(); ?>
+      <div id="bottom_line"></div>
     </nav><!-- /nav -->
 
   </header><!-- /header -->
