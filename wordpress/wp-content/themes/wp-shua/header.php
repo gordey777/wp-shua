@@ -54,20 +54,22 @@
       <ul id="main-nav" class="headnav">
         <li><a href="#about">о заводе</a></li>
         <li><a href="#tracks">беговые дорожки</a></li>
-        <li><a href="#">преимущества</a></li>
+        <li><a href="#video">преимущества</a></li>
         <li><a href="#portfolio">примеры объектов</a></li>
         <li><a href="#contacts">представительство в рф</a></li>
-
       </ul>
-
+      <div class="mob_wrapp">
         <ul class="langnav">
           <li><a href="#" class="active">рус</a></li>
           <li><a href="#">eng</a></li>
           <li><a href="#">fr</a></li>
           <li><a href="#">es</a></li>
           <li><a href="#">ch</a></li>
-
         </ul>
+        <div id="overlay_mob" class=" visible-xs-inline-block"></div>
+      </div>
+
+      <div id="humburger" class=" visible-xs-inline-block"></div>
 <?php //wpeHeadNav(); ?>
       <div id="bottom_line"></div>
     </nav><!-- /nav -->
