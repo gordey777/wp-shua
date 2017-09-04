@@ -37,27 +37,33 @@
             </a>
           <?php } ?>
         </div><!-- /.logo -->
-        <div class="olimpic col-sm-3 hidden-sm hidden-xs">
-          <img src="<?php echo get_template_directory_uri(); ?>/img/head-olimpic.png">
-          <span class="desc">китайский олимпийский комитет официальный поставщик </span>
-        </div><!-- /.olimpic -->
-        <div class="head-tel col-md-3 col-xs-6">
-          <a href="tel:8-800-200-66-36">8-800-200-66-36</a>
-          <span class="desc">бесплатные звонки по РФ</span>
-        </div><!-- /.head-tel -->
+
+          <?php if( have_rows('header_content', 34) ): ?>
+            <?php while ( have_rows('header_content', 34) ) : the_row(); ?>
+              <?php $image = get_sub_field('slogan_img'); ?>
+
+              <div class="olimpic col-sm-3 hidden-sm hidden-xs">
+                <?php if ( !empty($image)) : ?>
+                  <img src="<?php echo $image['url']; ?>">
+                <?php endif; ?>
+                <span class="desc"><?php the_sub_field('slogan_text'); ?></span>
+              </div><!-- /.olimpic -->
+              <div class="head-tel col-md-3 col-xs-6">
+                <a href="tel:8-800-200-66-36"><?php the_sub_field('tel'); ?></a>
+                <span class="desc">бесплатные звонки по РФ</span>
+              </div><!-- /.head-tel -->
+
+            <?php  endwhile; ?>
+          <?php endif; ?>
 
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 
 
     <nav class="nav__header container-fluid" role="navigation">
-      <ul id="main-nav" class="headnav">
-        <li><a href="#about">о заводе</a></li>
-        <li><a href="#tracks">беговые дорожки</a></li>
-        <li><a href="#video">преимущества</a></li>
-        <li><a href="#portfolio">примеры объектов</a></li>
-        <li><a href="#contacts">представительство в рф</a></li>
-      </ul>
+
+        <?php wpeHeadNav(); ?>
+
       <div class="mob_wrapp">
         <ul class="langnav">
           <li><a href="#" class="active">рус</a></li>
@@ -70,7 +76,7 @@
       </div>
 
       <div id="humburger" class=" visible-xs-inline-block"></div>
-<?php //wpeHeadNav(); ?>
+
       <div id="bottom_line"></div>
     </nav><!-- /nav -->
 

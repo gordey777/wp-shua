@@ -16,12 +16,9 @@
             <br> на территории России, Казахстана
             <br> и Республики Беларусь.
           </p><!-- /copyright -->
-          <div class="mob-contacts visible-xs">Россия, г. Томск, пр. Мира, 41а
-            <br> <a href="tel:8-800-200-66-36" class="tel">8-800-200-66-36</a>, <a href="tel:8-3822-799-699" class="tel">8-3822-799-699</a>
-            <br> www.shua.ru, shua@shua.ru
-            <br>
-            <br> пн-пт: 06:00— 14:00 (МСК)
-            <br> сб-вс: выходной
+          <div class="mob-contacts visible-xs">
+            <?php the_field('contacts', 34); ?>
+
           </div>
 
         </div>
@@ -34,8 +31,8 @@
 
     <?php wp_footer(); ?>
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.malihu.PageScroll2id.min.js"></script>
-<!--   <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/<?php echo get_template_directory_uri(); ?>/js/?um=constructor%3A0504abbe495faaf89b225ae12b7cc64c61fe11b786da9bfdfe6c16f070ad8216&amp;width=100%25&amp;height=420&amp;lang=uk_RU&amp;scroll=false;id=yamap"></script>
- -->
+
+
     <style>
     #tracks .video_wrapp iframe .ytp-title,
     #tracks .video_wrapp iframe .ytp-chrome-top-buttons,

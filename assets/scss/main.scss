@@ -877,11 +877,39 @@ article {
     margin-bottom: 50px;
   }
   .map-wrapp {
+    position: relative;
+
     display: inline-block;
 
     width: 100%;
+    margin: 0;
+    padding: 0;
+
+    transition: filter .15s;
 
     background: #fff;
+
+    filter: grayscale(100%);
+    #map-contacts {
+      font-size: 12px;
+
+      position: absolute;
+      z-index: 1;
+      top: 100px;
+      left: 20%;
+
+      width: 300px;
+      padding: 25px 40px;
+
+      color: $black;
+      background: #fff;
+      a {
+        color: $black;
+      }
+    }
+    &:hover {
+      filter: none;
+    }
   }
 }
 

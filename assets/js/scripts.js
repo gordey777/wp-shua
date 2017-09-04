@@ -22,100 +22,29 @@ if (typeof jQuery === 'undefined') {
 }
 
 
-
-// //alert($headH );
-// jQuery("#section-1").css("margin-top", $headH + "px");
-
-
-
-
-
-
-
 jQuery(document).ready(function() {
 
 
-
-  /*SCROL*/
-  // (function($) {
-  //   jQuery(window).load(function() {
-
-  //     jQuery("#main-nav a,a[href='#top'],a[rel='m_PageScroll2id']").mPageScroll2id({
-  //       highlightSelector: "#nav-menu a"
-  //     });
-
-  //     jQuery("a[rel='next']").click(function(e) {
-  //       e.preventDefault();
-  //       var to = jQuery(this).parent().parent("section").next().attr("id");
-  //       $.mPageScroll2id("scrollTo", to);
-  //     });
-
-  //   });
-  // })(jQuery);
-
-  // (function($) {
-  //   jQuery(window).load(function() {
-
-  //     jQuery("#main-nav a,a[href='#top'],a[rel='m_PageScroll2id']").mPageScroll2id({
-
-  //       scrollSpeed: 1300,
-  //       autoScrollSpeed: true,
-  //       pageEndSmoothScroll: true,
-  //       offset: mnuH,
-  //       forceSingleHighlight: false,
-  //       highlightByNextTarget: false,
-  //       /* disable plugin below [x,y] screen size: boolean, integer, array ([x,y]) */
-  //       disablePluginBelow: false,
-  //     });
-  //   });
-  // })(jQuery);
-
-
-
-
-
-
-
   /*ACTIVE MENU*/
-  jQuery("#main-nav a").hover(function() {
+  // jQuery("#main-nav a").hover(function() {
 
-    var linePosition = jQuery(this).offset(),
-      wrappPosition = jQuery('.wrapper').offset(),
+  //   var linePosition = jQuery(this).offset(),
+  //     wrappPosition = jQuery('.wrapper').offset(),
 
-      mnuW = jQuery(this).parent('li').width();
+  //     mnuW = jQuery(this).parent('li').width();
 
-    jQuery("#bottom_line").css({
-      left: linePosition.left - wrappPosition.left,
-      //left : 'auto',
-      //right: linePosition.leftright,
-      width: mnuW,
-    });
-  });
+  //   jQuery("#bottom_line").css({
+  //     left: linePosition.left - wrappPosition.left,
+  //     width: mnuW,
+  //   });
+  // });
 
   var mnuH = jQuery("#main-nav").height();
-  jQuery(window).scroll(function() {
-    mnuH = jQuery("#main-nav").height();
-  }).scroll();
+
 
   jQuery('#main-nav a:first').addClass('active');
 
   $('header').css('padding-bottom', mnuH);
-
-  function activeMenu() {
-    setTimeout(function(e) {
-      var linePos = jQuery("#main-nav a.active").offset(),
-        wrappPos = jQuery('.wrapper').offset(),
-        mnuW = jQuery("#main-nav a.active").parent('li').width();
-
-
-      jQuery("#bottom_line").css({
-        left: linePos.left - wrappPos.left,
-        width: mnuW,
-      });
-    }, 5);
-    return;
-  }
-
 
 
   jQuery('#main-nav a').on('click', function() {
@@ -131,10 +60,12 @@ jQuery(document).ready(function() {
 
   })
 
+
+  /*SCROLL TO*/
   jQuery('.scroll__to').on('click', function() {
 
     var scrollAnc = jQuery(this).attr('href'),
-      scrollPos = jQuery(scrollAnc).offset().top - 37;
+      scrollPos = jQuery(scrollAnc).offset().top - 30;
 
     jQuery('body,html').animate({
       scrollTop: scrollPos
@@ -149,8 +80,6 @@ jQuery(document).ready(function() {
   /*MOB MENU*/
   if (jQuery(window).width() < 768) {
 
-
-
     $('.nav__header .mob_wrapp').prepend('<ul id="mob_top"></ul>');
 
     $("#main-nav li").clone().appendTo("#mob_top");
@@ -158,7 +87,7 @@ jQuery(document).ready(function() {
 
 
     $('#humburger').click(function() {
-      var content = jQuery(this).data('tab');
+      var cont = jQuery(this).data('tab');
 
 
       jQuery(".mob_wrapp").toggleClass('open');
@@ -166,7 +95,7 @@ jQuery(document).ready(function() {
     });
 
     $('#overlay_mob').click(function() {
-      var content = jQuery(this).data('tab');
+      var cont = jQuery(this).data('tab');
       jQuery(".mob_wrapp").removeClass('open');
     });
 
@@ -186,8 +115,6 @@ jQuery(document).ready(function() {
       return false;
 
     })
-
-
   }
 
 
@@ -210,7 +137,8 @@ jQuery(document).ready(function() {
 
   })(jQuery);
 
-  activeMenu();
+
+
 });
 
 
@@ -218,45 +146,50 @@ jQuery(document).ready(function() {
 
 jQuery(window).scroll(function() {
 
+  var headerH = (jQuery('header .top-line').outerHeight()) + 30,
+    headerW = jQuery('header').width(),
+    mnuH = jQuery("#main-nav").height(),
+    windscroll = jQuery(window).scrollTop(),
+    wrappPosition = jQuery('.wrapper').offset();
+
+
+
+
   function activeMenu() {
-    setTimeout(function(e) {
+    setTimeout(function() {
       var linePos = jQuery("#main-nav a.active").offset(),
-        wrappPos = jQuery('.wrapper').offset(),
-        mnuW = jQuery("#main-nav a.active").parent('li').width();
+        mnuW = jQuery("#main-nav a.active").parent('li').width(),
+        linePosA = linePos.left - wrappPosition.left;
 
 
       jQuery("#bottom_line").css({
-        left: linePos.left - wrappPos.left,
+        left: linePosA,
         width: mnuW,
       });
     }, 100);
-    return;
+
+  }
+
+  function scrollActive() {
+    jQuery('section').each(function(i) {
+      if (jQuery(this).position().top <= windscroll + 50 || jQuery(this).position().bottom <= windscroll - 20) {
+        jQuery('#main-nav a.active').removeClass('active');
+
+        jQuery('#main-nav a[ href = "#' + jQuery(this).attr("id") + '"]').addClass('active');
+        activeMenu();
+      }
+
+      //activeMenu();
+    });
   }
 
 
-  var headerH = (jQuery('header .top-line').outerHeight()) + 30,
-    headerW = jQuery('header').width();
 
 
-
-  var mnuH = jQuery("#main-nav").height();
-  windscroll = jQuery(window).scrollTop(),
-
-    wrappPosition = jQuery('.wrapper').offset();
 
   if (jQuery(window).width() >= 768) {
-    function scrollActive() {
-      jQuery('section').each(function(i) {
-        if (jQuery(this).position().top <= windscroll + 50 || jQuery(this).position().bottom <= windscroll - 20) {
-          jQuery('#main-nav a.active').removeClass('active');
 
-          jQuery('#main-nav a[ href = "#' + jQuery(this).attr("id") + '"]').addClass('active');
-          activeMenu();
-        }
-
-        activeMenu();
-      });
-    }
+    activeMenu();
 
     if (windscroll >= 10) {
       scrollActive();
@@ -266,49 +199,38 @@ jQuery(window).scroll(function() {
         left: wrappPosition.left,
         width: headerW,
       });
-      jQuery('heder .logo').css({
+      jQuery('header .logo').css({
         left: wrappPosition.left,
         height: mnuH,
-
       });
 
-
-
-      /*    var hrefID = jQuery(this).attr("id"),
-            selector = '#main-nav a[ href="#' + hrefID + '" ]';
-          jQuery(selector).addClass('active');*/
     } else {
 
       jQuery('header').removeClass('fixed');
       jQuery('.nav__header').css({
         left: 0,
         width: '100%',
-
       });
-
+      jQuery('header .logo').css({
+        left: 0,
+        height: 'auto',
+      });
       scrollActive();
-      //jQuery('#main-nav a.active').removeClass('active');
-      //jQuery('#main-nav a:first').addClass('active');
 
 
-
-      activeMenu();
     }
 
-    jQuery("#main-nav a").hover(function() {
+    // jQuery("#main-nav a").hover(function() {
 
-      var linePosition = jQuery(this).offset(),
-        wrappPosition = jQuery('.wrapper').offset(),
+    //   var linePosition = jQuery(this).offset(),
+    //     wrappPosition = jQuery('.wrapper').offset(),
+    //     mnuW = jQuery(this).parent('li').width();
 
-        mnuW = jQuery(this).parent('li').width();
-
-      jQuery("#bottom_line").css({
-        left: linePosition.left - wrappPosition.left,
-        //left : 'auto',
-        //right: linePosition.leftright,
-        width: mnuW,
-      });
-    });
+    //   jQuery("#bottom_line").css({
+    //     left: linePosition.left - wrappPosition.left,
+    //     width: mnuW,
+    //   });
+    // });
   }
 
 }).scroll();
