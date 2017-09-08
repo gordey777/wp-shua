@@ -25,7 +25,7 @@
 
 <div class="wrapper">
   <header id="header" role="banner">
-    <div class="container-fluid black-bg">
+    <div class="container-fluid">
       <div class="row top-line flax-row">
 
         <div class="logo col-sm-3 col-xs-6">
@@ -60,24 +60,23 @@
     </div><!-- /.container-fluid -->
 
 
-    <nav class="nav__header container-fluid" role="navigation">
-
+    <nav class="nav__header" role="navigation">
+    <div class="container-fluid menu-line">
         <?php wpeHeadNav(); ?>
 
+
+
       <div class="mob_wrapp">
-        <ul class="langnav">
-          <li><a href="#" class="active">рус</a></li>
-          <li><a href="#">eng</a></li>
-          <li><a href="#">fr</a></li>
-          <li><a href="#">es</a></li>
-          <li><a href="#">ch</a></li>
-        </ul>
+
+        <?php wpeHeadNavLang(); ?>
+
         <div id="overlay_mob" class=" visible-xs-inline-block"></div>
       </div>
 
       <div id="humburger" class=" visible-xs-inline-block"></div>
 
       <div id="bottom_line"></div>
+          </div><!-- /.container-fluid -->
     </nav><!-- /nav -->
 
   </header><!-- /header -->

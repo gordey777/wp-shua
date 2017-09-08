@@ -50,9 +50,9 @@ jQuery(document).ready(function() {
 
 
   jQuery('#main-nav a:first').addClass('active');
-
-  $('header').css('padding-bottom', mnuH);
-
+  if (jQuery(window).width() >= 768) {
+    $('header').css('padding-bottom', mnuH);
+  }
 
   jQuery('#main-nav a').on('click', function() {
     //var mnuH = jQuery(".nav__header").height();
@@ -139,7 +139,7 @@ jQuery(document).ready(function() {
       jQuery(this).addClass("active");
       jQuery("#product_tabs").find('.tab-content').hide();
       jQuery("#product_tabs").find('.tab-content.active').removeClass("activ");
-      jQuery(content).fadeIn(300).removeClass("hidden_tab").addClass("active");
+      jQuery('[data-id="' + content + '"]').fadeIn(300).removeClass("hidden_tab").addClass("active");
     });
 
   })(jQuery);
@@ -151,11 +151,11 @@ jQuery(document).ready(function() {
 
 jQuery(window).scroll(function() {
 
-  var headerH = (jQuery('header .top-line').outerHeight()) + 30,
+  var headerH = (jQuery('header .top-line').outerHeight()),
     headerW = jQuery('header').width(),
     mnuH = jQuery("#main-nav").height(),
     windscroll = jQuery(window).scrollTop(),
-    wrappPosition = jQuery('.wrapper').offset(),
+    wrappPosition = jQuery('.container-fluid').offset(),
     linePos = jQuery("#main-nav a.active").offset();
 
 
@@ -183,7 +183,7 @@ jQuery(window).scroll(function() {
     });
     var lenMenu = arrMenu.length;
     for (var i = 0; i < lenMenu; i++) {
-      if (jQuery(arrMenu[i]).position().top <= windscroll + 50 || jQuery(arrMenu[i]).position().bottom <= windscroll - 20) {
+      if (jQuery(arrMenu[i]).offset().top <= windscroll + 50 || jQuery(arrMenu[i]).offset().bottom <= windscroll - 20) {
         jQuery('#main-nav a.active').removeClass('active');
 
         var activeIthem = jQuery('#main-nav a[ href = "' + arrMenu[i] + '"]');
@@ -216,16 +216,16 @@ jQuery(window).scroll(function() {
 
     activeMenu();
 
-    if (windscroll >= 10) {
+    if (windscroll >= headerH - 20) {
 
       //var mnuH = jQuery(".nav__header").height();
       jQuery('header').addClass('fixed');
       jQuery('.nav__header').css({
-        left: wrappPosition.left,
-        width: headerW,
+        //left: wrappPosition.left,
+        //width: headerW,
       });
       jQuery('header .logo').css({
-        left: wrappPosition.left,
+        left: jQuery('#main-nav').offset().left,
         height: mnuH,
       });
       scrollActive();
@@ -234,10 +234,10 @@ jQuery(window).scroll(function() {
       jQuery('header').removeClass('fixed');
       jQuery('.nav__header').css({
         left: 0,
-        width: '100%',
+        //width: '100%',
       });
       jQuery('header .logo').css({
-        left: 0,
+        left: 'auto',
         height: 'auto',
       });
       scrollActive();

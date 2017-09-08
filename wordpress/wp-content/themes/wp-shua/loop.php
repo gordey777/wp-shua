@@ -1,5 +1,5 @@
 <?php if (have_posts()): while (have_posts()) : the_post(); ?>
-  <div id="post-<?php the_ID(); ?>" <?php post_class('looper'); ?>>
+  <div id="post-<?php the_ID(); ?>" <?php post_class('col-sm-4 col-xs-6 looper'); ?>>
 
     <a rel="nofollow" class="feature-img" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
       <?php if ( has_post_thumbnail()) { ?>
@@ -21,3 +21,4 @@
 
   </div><!-- /looper -->
 <?php endwhile; endif; ?>
+<div class="clearfix"></div>

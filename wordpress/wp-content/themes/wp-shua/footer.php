@@ -1,7 +1,7 @@
 </div><!-- /wrapper -->
 
-  <footer role="contentinfo">
-    <div class="footer-cont container-fluid black-bg">
+  <footer role="contentinfo" class="black-bg">
+    <div class="footer-cont container-fluid">
       <div class="row">
         <div class="footer-center col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
         <div class="footer-logos">
@@ -17,7 +17,7 @@
             <br> и Республики Беларусь.
           </p><!-- /copyright -->
           <div class="mob-contacts visible-xs">
-            <?php the_field('contacts', 34); ?>
+            <p><?php the_field('contacts', 34); ?></p>
 
           </div>
 
@@ -29,17 +29,9 @@
     </div><!-- /.container-fluid -->
   </footer><!-- /footer -->
 
-    <?php wp_footer(); ?>
+  <?php wp_footer(); ?>
+
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.malihu.PageScroll2id.min.js"></script>
 
-
-    <style>
-    #tracks .video_wrapp iframe .ytp-title,
-    #tracks .video_wrapp iframe .ytp-chrome-top-buttons,
-    #tracks .video_wrapp iframe .ytp-share-button-visible {
-      display: none !important;
-    }
-
-  </style>
 </body>
 </html>

@@ -3,7 +3,7 @@
   <?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
   <section id="about" <?php post_class(); ?>>
-    <?php edit_post_link(); ?>
+    <?php //edit_post_link(); ?>
     <div class="container-fluid siluet">
       <div class="row">
 
@@ -36,32 +36,35 @@
         </div>
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
-    <div id="manufacture" class="container-fluid geography">
-
-      <?php if( have_rows('geography') ): ?>
-        <?php while ( have_rows('geography') ) : the_row(); ?>
+    <?php if( have_rows('geography') ): ?>
+      <?php while ( have_rows('geography') ) : the_row(); ?>
+         <div id="manufacture" class="container-fluid geography">
           <?php $image = get_sub_field('img'); ?>
           <div class="row">
             <div class="col-md-12">
               <h3><?php the_sub_field('title'); ?></h3>
             </div>
           </div><!-- /.row -->
-          <div class="manufacture-map" <?php if ( !empty($image)) : ?> style="background-image: url('<?php echo $image['url']; ?>');"<?php endif; ?>></div>
-        <?php  endwhile; ?>
-      <?php endif; ?>
+        </div><!-- /#manufacture.container-fluid -->
 
-    </div><!-- /#manufacture.container-fluid -->
+        <div class="manufacture-map" <?php if ( !empty($image)) : ?> style="background-image: url('<?php echo $image['url']; ?>');"<?php endif; ?>></div>
+
+      <?php  endwhile; ?>
+    <?php endif; ?>
 
     <?php if( have_rows('about_content') ): ?>
-      <div class="container-fluid white-bg man-content hidden-xs">
-        <div class="row">
-          <?php while ( have_rows('about_content') ) : the_row(); ?>
-            <div class="col-sm-6">
-              <?php the_sub_field('sub_content'); ?>
-            </div>
-          <?php endwhile; ?>
-        </div>
-      </div><!-- .container-fluid -->
+
+      <div class="white-bg">
+        <div class="container-fluid  man-content hidden-xs">
+          <div class="row">
+            <?php while ( have_rows('about_content') ) : the_row(); ?>
+              <div class="col-sm-6">
+                <?php the_sub_field('sub_content'); ?>
+              </div>
+            <?php endwhile; ?>
+          </div>
+        </div><!-- .container-fluid -->
+      </div>
     <?php endif; ?>
   </section><!-- /#about -->
 
@@ -105,15 +108,13 @@
                     } else {
                       $act_class = '';
                     } ?>
-                  <a class="tab-btn <?php echo $act_class; ?>" data-tab="#tab-<?php echo $i; ?>"><?php the_sub_field('model'); ?></a>
+                  <div class="tab-btn <?php echo $act_class; ?>" data-tab="#tab-<?php echo $i; ?>"><?php the_sub_field('model'); ?></div>
 
                   <?php  $i++; ?>
                 <?php  endwhile; ?>
               </div>
               <a href="#comparison" class="hidden-xs comparison_link scroll__to">сравнить</a>
             </div>
-
-
 
             <?php $file = get_field('pdf_present'); ?>
             <?php if ( !empty($file)) : ?>
@@ -143,57 +144,81 @@
               $activ_class = 'hidden_tab';
               } ?>
 
-            <div id="tab-<?php echo $j; ?>" class="col-md-12 tab-content <?php echo $activ_class; ?>">
+            <div id="tab-<?php echo $j; ?>" data-id="#tab-<?php echo $j; ?>" class="col-md-12 tab-content <?php echo $activ_class; ?>">
               <div class="row">
-                <div class="col-sm-4 prod-img">
+                <div class="col-sm-4 col-xs-12 prod-img">
                   <?php if ( !empty($image)) : ?>
                     <img src="<?php echo $image['url']; ?>" title="<?php the_sub_field('title'); ?>">
                   <?php endif; ?>
                 </div>
-                <div class="col-sm-8 prod-table">
+
+                <div class="col-sm-8 col-xs-12 prod-table">
                   <div class="table_title">Характеристики<span class="right"><?php the_sub_field('title'); ?></span></div>
                   <?php the_sub_field('cont'); ?>
                 </div>
 
-                <?php if( get_sub_field('icons' ) ): ?>
-                  <div class="col-md-12 prod-character">
-                    <?php while ( has_sub_field('icons' ) ) : ?>
-                      <?php $image = get_sub_field('sub_img'); ?>
-
-                      <div class="col-sm-3 col-xs-6 char-ithem">
-                        <div class="icon">
-                          <?php if ( !empty($image)) : ?>
-                            <img src="<?php echo $image['url']; ?>">
-                          <?php endif; ?>
-                        </div>
-                        <div class="icon-label"><?php the_sub_field('sub_title'); ?></div>
-                      </div>
-                    <?php endwhile; ?>
-                  </div>
-                <?php endif; ?>
 
               </div><!-- /.row -->
             </div><!-- /#tab-<?php echo $j; ?> -->
             <?php  $j++; ?>
           <?php  endwhile; ?>
 
+          <div id="track_advantages" class="col-md-12">
+            <div class="row">
+              <?php $k = 1; ?>
+              <?php while ( have_rows('product_tabs') ) : the_row(); ?>
+                <?php $image = get_sub_field('img'); ?>
+                <?php if ( $k == 1 ) {
+                  $activ_class = 'active';
+                  } else{
+                  $activ_class = 'hidden_tab';
+                  } ?>
+
+                <div data-id="#tab-<?php echo $k; ?>" class="col-md-12 tab-content <?php echo $activ_class; ?>">
+                  <?php if( get_sub_field('icons' ) ): ?>
+                    <div class="row">
+                    <div class="col-md-12 prod-character">
+                      <?php while ( has_sub_field('icons' ) ) : ?>
+                        <?php $image = get_sub_field('sub_img'); ?>
+
+                        <div class="col-sm-3 col-xs-6 char-ithem">
+                          <div class="icon">
+                            <?php if ( !empty($image)) : ?>
+                              <img src="<?php echo $image['url']; ?>">
+                            <?php endif; ?>
+                          </div>
+                          <div class="icon-label"><?php the_sub_field('sub_title'); ?></div>
+                        </div>
+                      <?php endwhile; ?>
+                    </div>
+                    </div>
+                  <?php endif; ?>
+
+                </div><!-- /#adv-tab-<?php echo $j; ?> -->
+                <?php  $k++; ?>
+              <?php  endwhile; ?>
+            </div><!-- /.row -->
+          </div><!-- /#track_advantages -->
+
         </div><!-- /.row -->
       <?php endif; ?>
-                  <?php $file = get_field('pdf_present'); ?>
-            <?php if ( !empty($file)) : ?>
 
-              <?php $attachment_id = $file['ID'];
-              $url = wp_get_attachment_url( $attachment_id );
-              $title = get_the_title( $attachment_id );
+      <?php $file_mob = get_field('pdf_present'); ?>
+      <?php if ( !empty($file_mob)) : ?>
+        <?php $attachment_id = $file_mob['ID'];
+        $url = wp_get_attachment_url( $attachment_id );
+        $title = get_the_title( $attachment_id );
 
-              $filesize = filesize( get_attached_file( $attachment_id ) );
-              $filesize = size_format($filesize, 0); ?>
+        $filesize = filesize( get_attached_file( $attachment_id ) );
+        $filesize = size_format($filesize, 0); ?>
 
-              <a rel="nofollow" href="<?php echo $file['url']; ?>" download="<?php echo $file['url']; ?>" class="present__doc visible-xs-inline-block">
-                PDF-презентация,
-                <span class="size"> <?php echo $filesize; ?></span>
-              </a>
-            <?php endif; ?>
+
+        <div class="present__doc_wpapp visible-xs-inline-block">
+          <a rel="nofollow" href="<?php echo $file_mob['url']; ?>" download="<?php echo $file_mob['url']; ?>" class="present__doc">
+            PDF-презентация,<span class="size"> <?php echo $filesize; ?></span>
+          </a>
+        </div>
+      <?php endif; ?>
     </div><!-- /.container-fluid -->
 
   </section><!-- /#tracks -->
@@ -260,11 +285,12 @@
       <h2>представительство в рф</h2>
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
-    <div class="col-md-12 map-wrapp hidden-xs">
+    <div class="map-wrapp hidden-xs">
       <div id="yamap" style="width: 100%; height: 420px">
 
       <div id="map-contacts">
-        <?php the_field('contacts'); ?>
+        <p><strong><?php the_field('contacts_title'); ?></strong></p>
+        <p><?php the_field('contacts'); ?></p>
       </div>
 
       <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad3aba0f92698f38bbc8bfcdfa377bea04da61470af16c60f26b102fa95b4f8cb&amp;width=100%25&amp;height=420&amp;lang=uk_RU&amp;scroll=falce"></script>

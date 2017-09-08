@@ -1,9 +1,25 @@
 <?php get_header(); ?>
-  <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+  <?php if (have_posts()): while (have_posts()) : the_post(); ?>
+  <section>
+    <div class="container-fluid siluet"><?php //edit_post_link(); ?>
+      <div class="row">
+        <div class="col-md-12 about">
+          <h1 class="page-title"><?php _e( 'Page not found', 'wpeasy' ); ?></h1>
+        </div><!-- /.about-->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+    <article id="post-<?php the_ID(); ?>" <?php post_class('white-bg'); ?>>
+      <div class="container-fluid  man-content hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2><a href="<?php echo home_url(); ?>"><?php _e( 'Return home?', 'wpeasy' ); ?></a></h2>
+          </div>
+        </div>
+      </div><!-- .container-fluid -->
+    </article>
 
-    <h1 class="ctitle"><?php _e( 'Page not found', 'wpeasy' ); ?></h1>
-    <h2><a href="<?php echo home_url(); ?>"><?php _e( 'Return home?', 'wpeasy' ); ?></a></h2>
+    <?php //get_sidebar(); ?>
+  </section>
 
-  </article>
-<?php get_sidebar(); ?>
+  <?php endwhile; endif; ?>
 <?php get_footer(); ?>
